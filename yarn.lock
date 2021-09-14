@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@gltf-transform/core@^0.12.11":
+  version "0.12.11"
+  resolved "https://registry.yarnpkg.com/@gltf-transform/core/-/core-0.12.11.tgz#14d0f41d9f0cf1817015ccaeae865dbeb1230cdf"
+  integrity sha512-hvfMn2PfygIlCDuswcwDAyyXOEqSmj8wt/MkLn8UDGGAGDZcjQyAUA+coxa1N8nFPlcAdcWXwtNoVfVAdGcCLA==
+  dependencies:
+    gl-matrix "^3.3.0"
+
 ansi-regex@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-5.0.0.tgz#388539f55179bf39339c81af30a654d69f87cb75"
@@ -49,6 +56,11 @@ get-caller-file@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-2.0.5.tgz#4f94412a82db32f36e3b0b9741f8a97feb031f7e"
   integrity sha512-DyFP3BM/3YHTQOCUL/w0OZHR0lpKeGrxotcHWcqNEdnltqFwXVfhEBQ94eIo34AfQpo0rGki4cyIiftY06h2Fg==
+
+gl-matrix@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/gl-matrix/-/gl-matrix-3.3.0.tgz#232eef60b1c8b30a28cbbe75b2caf6c48fd6358b"
+  integrity sha512-COb7LDz+SXaHtl/h4LeaFcNdJdAQSDeVqjiIihSXNrkWObZLhDI4hIkZC11Aeqp7bcE72clzB0BnDXr2SmslRA==
 
 is-fullwidth-code-point@^3.0.0:
   version "3.0.0"

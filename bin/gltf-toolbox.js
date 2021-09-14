@@ -5,6 +5,7 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import fs from 'fs';
 import path from 'path';
+import { NodeIO } from '@gltf-transform/core';
 
 const argv = yargs(hideBin(process.argv))
   .usage('Usage: node $0 -i inputPath -o outputPath')
@@ -64,9 +65,15 @@ if (!outputPath) {
   );
 }
 
-// const outputDirectory = path.dirname(outputPath);
-// const outputName = path.basename(outputPath, path.extname(outputPath));
-// outputExtension = path.extname(outputPath).toLowerCase();
-// if (outputExtension !== '.gltf' && outputExtension !== '.glb') {
-//   console.log('Error: unrecognized file extension "' + outputExtension + '".');
-// }
+function dummyTransform() {
+  return () => {};
+}
+
+const transforms = [dummyTransform()];
+
+const io = new NodeIO();
+const document = io.read(inputPath);
+
+await document.transform(...transforms);
+
+io.write(outputPath, document);
