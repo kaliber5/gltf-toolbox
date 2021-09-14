@@ -1,0 +1,26 @@
+{
+  "name": "gltf-toolbox",
+  "version": "0.0.0",
+  "description": "Tools to optimize GLTF files",
+  "main": "index.js",
+  "repository": "https://github.com/kaliber5/gltf-toolbox.git",
+  "author": "Simon Ihmig <simon.ihmig@kaliber5.de>",
+  "license": "MIT",
+  "volta": {
+    "node": "16.9.1",
+    "yarn": "1.22.11"
+  },
+  "dependencies": {
+    "yargs": "^17.1.1"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "bin": {
+    "gltf-toolbox": "bin/gltf-toolbox.js"
+  },
+  "devDependencies": {
+    "prettier": "^2.4.0"
+  },
+  "type": "module"
+}
