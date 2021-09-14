@@ -7,7 +7,7 @@ import fs from 'fs';
 import path from 'path';
 import { NodeIO } from '@gltf-transform/core';
 
-import { materialOnly } from '../src/transforms/index.js';
+import { imageFormat, materialOnly } from '../src/transforms/index.js';
 
 const argv = yargs(hideBin(process.argv))
   .usage('Usage: node $0 -i inputPath -o outputPath')
@@ -39,6 +39,16 @@ const argv = yargs(hideBin(process.argv))
       type: 'boolean',
       default: false,
     },
+    imageFormat: {
+      alias: 'if',
+      describe: 'Convert textures to different image format.',
+      type: 'string',
+    },
+    quality: {
+      alias: 'q',
+      describe: 'Quality setting (0 - 100) when using the imageFormat option.',
+      type: 'number',
+    },
   })
   .check((argv) => {
     if (!fs.existsSync(argv.input)) {
@@ -48,6 +58,10 @@ const argv = yargs(hideBin(process.argv))
     const inputExtension = path.extname(argv.input).toLowerCase();
     if (!['.gltf', '.glb'].includes(inputExtension)) {
       throw new Error(`Unknown file extension for input: ${inputExtension}`);
+    }
+
+    if (argv.imageFormat && !['webp'].includes(argv.imageFormat)) {
+      throw new Error(`Unsupported image format: ${argv.imageFormat}`);
     }
 
     return true;
@@ -73,7 +87,12 @@ if (!outputPath) {
   );
 }
 
-const transforms = [argv.materialOnly ? materialOnly() : null].filter(Boolean);
+const transforms = [
+  argv.materialOnly ? materialOnly() : null,
+  argv.imageFormat
+    ? imageFormat({ format: argv.imageFormat, quality: argv.quality })
+    : null,
+].filter(Boolean);
 
 const io = new NodeIO();
 const document = io.read(inputPath);
