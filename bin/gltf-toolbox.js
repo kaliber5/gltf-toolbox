@@ -7,6 +7,8 @@ import fs from 'fs';
 import path from 'path';
 import { NodeIO } from '@gltf-transform/core';
 
+import { materialOnly } from '../src/transforms/index.js';
+
 const argv = yargs(hideBin(process.argv))
   .usage('Usage: node $0 -i inputPath -o outputPath')
   .help('h')
@@ -28,6 +30,12 @@ const argv = yargs(hideBin(process.argv))
     binary: {
       alias: 'b',
       describe: 'Save output as binary glb.',
+      type: 'boolean',
+      default: false,
+    },
+    materialOnly: {
+      alias: 'mo',
+      describe: 'Remove all elements except for materials.',
       type: 'boolean',
       default: false,
     },
@@ -65,11 +73,7 @@ if (!outputPath) {
   );
 }
 
-function dummyTransform() {
-  return () => {};
-}
-
-const transforms = [dummyTransform()];
+const transforms = [argv.materialOnly ? materialOnly() : null].filter(Boolean);
 
 const io = new NodeIO();
 const document = io.read(inputPath);
