@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@gltf-transform/core": "^0.12.11",
+    "@gltf-transform/extensions": "^0.12.11",
+    "sharp": "^0.29.1",
     "yargs": "^17.1.1"
   },
   "engines": {
@@ -21,6 +23,7 @@
     "gltf-toolbox": "bin/gltf-toolbox.js"
   },
   "devDependencies": {
+    "@types/sharp": "^0.29.2",
     "prettier": "^2.4.0"
   },
   "type": "module"
