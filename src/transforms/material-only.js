@@ -17,5 +17,6 @@ export function materialOnly() {
       root.listSkins(),
       root.listScenes()
     );
+    doc.createBuffer();
   };
 }
