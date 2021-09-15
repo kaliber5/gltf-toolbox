@@ -7,7 +7,11 @@ import fs from 'fs';
 import path from 'path';
 import { NodeIO } from '@gltf-transform/core';
 
-import { imageFormat, materialOnly } from '../src/transforms/index.js';
+import {
+  imageFormat,
+  materialOnly,
+  replaceSingleColorTexture,
+} from '../src/transforms/index.js';
 
 const argv = yargs(hideBin(process.argv))
   .usage('Usage: node $0 -i inputPath -o outputPath')
@@ -49,6 +53,13 @@ const argv = yargs(hideBin(process.argv))
       describe: 'Quality setting (0 - 100) when using the imageFormat option.',
       type: 'number',
     },
+    replaceSingleColorTextures: {
+      alias: 'rsct',
+      describe:
+        'Replace all textures that have only a single color with a simple value.',
+      type: 'boolean',
+      default: false,
+    },
   })
   .check((argv) => {
     if (!fs.existsSync(argv.input)) {
@@ -89,6 +100,7 @@ if (!outputPath) {
 
 const transforms = [
   argv.materialOnly ? materialOnly() : null,
+  argv.replaceSingleColorTextures ? replaceSingleColorTexture() : null,
   argv.imageFormat
     ? imageFormat({ format: argv.imageFormat, quality: argv.quality })
     : null,
